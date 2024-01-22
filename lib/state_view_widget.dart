@@ -23,18 +23,20 @@ abstract class StateViewWidget extends StatefulWidget {
 }
 
 abstract class ViewState<T extends StateViewWidget> extends State {
-  T? model;
+  T? _model;
+  T get model => _model!;
+
   @override
   void initState() {
     super.initState();
-    model = widget as T?;
-    model?._state = this;
+    _model = widget as T?;
+    _model?._state = this;
   }
 
   @override
   void dispose() {
-    model?._state = null;
-    model = null;
+    _model?._state = null;
+    _model = null;
     super.dispose();
   }
 }
