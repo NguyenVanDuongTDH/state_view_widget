@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 typedef ConsumerKey = GlobalKey<_ConsumerState>;
 
-extension Uint8ListToPyBytes on ConsumerKey {
+extension CallSetSate on ConsumerKey {
   void reBuild() {
     return currentState?.setState(() {});
   }
