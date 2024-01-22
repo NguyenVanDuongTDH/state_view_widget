@@ -1,17 +1,16 @@
-
 // ignore_for_file: must_be_immutable, invalid_use_of_protected_member, no_logic_in_create_state
+library state_view_widget;
 
 import 'package:flutter/material.dart';
 
 abstract class StateViewWidget extends StatefulWidget {
   StateViewWidget({super.key});
-  State? state;
-  
+  State? _state;
 
-  void setState(void Function() fn) => state?.setState(() {
+  void setState(void Function() fn) => _state?.setState(() {
         fn();
       });
-  void reBuild() => state?.setState(() {});
+  void reBuild() => _state?.setState(() {});
 
   @override
   State createState() {
@@ -29,14 +28,13 @@ abstract class ViewState<T extends StateViewWidget> extends State {
   void initState() {
     super.initState();
     model = widget as T?;
-    model?.state = this;
+    model?._state = this;
   }
 
   @override
   void dispose() {
-    model?.state = null;
+    model?._state = null;
     model = null;
     super.dispose();
   }
 }
-
