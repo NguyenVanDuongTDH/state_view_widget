@@ -1,20 +1,22 @@
-
-import 'package:flutter/material.dart';
+// ignore_for_file: use_key_in_widget_constructors
 // ignore_for_file: invalid_use_of_protected_member, must_be_immutable
 
-typedef ConsumerKey = GlobalKey<_ConsumerState>;
+import 'package:flutter/material.dart';
 
-extension CallSetSate on ConsumerKey {
-  void reBuild() {
-    return currentState?.setState(() {});
+class ConsumerKey {
+  void Function()? func;
+
+  void reBuild() => func != null ? func!() : null;
+
+  void setState(void Function() fn) {
+    fn();
+    func != null ? func!() : null;
   }
-
-  void setState(void Function() fn) => currentState?.setState(fn);
 }
 
 class Consumer extends StatefulWidget {
-  Consumer({Key? key, required this.child}) : super(key: key);
-
+  Consumer({ConsumerKey? key, required this.child}) : _key = key;
+  final ConsumerKey? _key;
   Widget Function() child;
 
   @override
@@ -22,6 +24,21 @@ class Consumer extends StatefulWidget {
 }
 
 class _ConsumerState extends State<Consumer> {
+  @override
+  void initState() {
+    super.initState();
+    widget._key?.func = () {
+      setState(() {});
+    };
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget._key?.func = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.child();
