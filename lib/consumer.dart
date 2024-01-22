@@ -8,10 +8,6 @@ class ConsumerKey {
 
   void reBuild() => func != null ? func!() : null;
 
-  void setState(void Function() fn) {
-    fn();
-    func != null ? func!() : null;
-  }
 }
 
 class Consumer extends StatefulWidget {
