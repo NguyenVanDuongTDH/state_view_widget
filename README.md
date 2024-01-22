@@ -46,15 +46,25 @@ Example
 import 'package:flutter/material.dart';
 import 'package:state_view_widget/state_view_widget.dart';
 
+// MyView myView = MyView();
+
+// void main() {
+//   runApp(MaterialApp(home: myView));
+// }
+
 void main() {
-  runApp(MaterialApp(home: Scaffold(body: MyView())));
+  runApp(MaterialApp(home: MyView()));
 }
 
 class MyView extends StateViewWidget {
   MyView({Key? key}) : super(key: key);
+  final ConsumerKey countKey = ConsumerKey();
 
   int count = 0;
-  void increment() => setState(() {
+  void incrementAll() => setState(() {
+        count++;
+      });
+  void incrementOnely() => countKey.setState(() {
         count++;
       });
 
@@ -66,37 +76,31 @@ class MyView extends StateViewWidget {
 
 class MyViewWidget extends StatelessWidget {
   final MyView model;
-  MyViewWidget({required this.model, Key? key}) : super(key: key);
-
-  final ConsumerKey _countKey = ConsumerKey();
+  const MyViewWidget({required this.model, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: [
-        ElevatedButton(
-            onPressed: () {
-              model.count++;
-            },
-            child: Text("${model.count}")),
-        ElevatedButton(
-            onPressed: () {
-              model.increment();
-            },
-            child: Text("${model.count}")),
-        Consumer(
-          key: _countKey,
-          child: () => ElevatedButton(
-              onPressed: () => _countKey.setState(() {
-                    model.count++;
-                  }),
-              child: Text("${model.count}")),
-        )
-      ],
-    ));
+    return Scaffold(
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: model.incrementAll,
+            child: Text("${model.count}"),
+          ),
+          const SizedBox(height: 50),
+          Consumer(
+            key: model.countKey,
+            child: () => ElevatedButton(
+                onPressed: model.incrementOnely, child: Text("${model.count}")),
+          )
+        ],
+      )),
+    );
   }
 }
+
 ```
 
 
