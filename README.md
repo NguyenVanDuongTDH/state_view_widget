@@ -44,6 +44,7 @@ Example
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:state_view_widget/consumer.dart';
 import 'package:state_view_widget/state_view_widget.dart';
 
 // MyView myView = MyView();
@@ -57,27 +58,26 @@ void main() {
 }
 
 class MyView extends StateViewWidget {
-  MyView({Key? key}) : super(key: key);
+  MyView({super.key});
+
   final ConsumerKey countKey = ConsumerKey();
 
   int count = 0;
-  void incrementAll() => setState(() {
-        count++;
-      });
-  void incrementOnely() => countKey.setState(() {
-        count++;
-      });
+  void incrementAll() {
+    count++;
+    reBuild();
+  }
+
+  void incrementOnely() {
+    count++;
+    countKey.reBuild();
+  }
 
   @override
-  Widget view(BuildContext context) {
-    return MyViewWidget(model: this);
-  }
+  StateView<MyView> createState() => _MyViewState();
 }
 
-class MyViewWidget extends StatelessWidget {
-  final MyView model;
-  const MyViewWidget({required this.model, Key? key}) : super(key: key);
-
+class _MyViewState extends StateView<MyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +100,7 @@ class MyViewWidget extends StatelessWidget {
     );
   }
 }
+
 
 ```
 
