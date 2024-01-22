@@ -4,7 +4,7 @@ add to pubspec.yaml
 dependencies:
   state_view_widget:
     git:
-      url: https://github.com/NguyenVanDuongTDH/view_controll.git
+      url: https://github.com/NguyenVanDuongTDH/state_view_widget.git
 ```
 
 Visual studio code
