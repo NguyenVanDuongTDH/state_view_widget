@@ -40,55 +40,60 @@ File -> Preferences -> Configure User Snippets
 
 Example
 ```dart
-import 'package:view_controll/view_controll.dart';
+// ignore_for_file: must_be_immutable
 
-CounterPage counterPage = CounterPage();
+import 'package:flutter/material.dart';
+import 'package:state_view_widget/state_view_widget.dart';
 
 void main() {
-  runApp(MaterialApp(home: counterPage));
+  runApp(MaterialApp(home: Scaffold(body: MyView())));
 }
 
-// ignore: must_be_immutable
-class CounterPage extends StateViewWidget {
-  CounterPage({Key? key}) : super(key: key);
+class MyView extends StateViewWidget {
+  MyView({Key? key}) : super(key: key);
 
-  int _count = 0;
-  int get count => _count;
-
-  void increment() {
-    _count++;
-    reload();
-  }
+  int count = 0;
+  void increment() => setState(() {
+        count++;
+      });
 
   @override
   Widget view(BuildContext context) {
-    return CounterPageWidget(model: this);
+    return MyViewWidget(model: this);
   }
 }
 
+class MyViewWidget extends StatelessWidget {
+  final MyView model;
+  MyViewWidget({required this.model, Key? key}) : super(key: key);
 
-
-
-class CounterPageWidget extends StatelessWidget {
-  final CounterPage model;
-  const CounterPageWidget({required this.model, Key? key}) : super(key: key);
+  final ConsumerKey _countKey = ConsumerKey();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          "${model.count}",
-          style: const TextStyle(fontSize: 21),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          model.increment();
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
+    return Center(
+        child: Column(
+      children: [
+        ElevatedButton(
+            onPressed: () {
+              model.count++;
+            },
+            child: Text("${model.count}")),
+        ElevatedButton(
+            onPressed: () {
+              model.increment();
+            },
+            child: Text("${model.count}")),
+        Consumer(
+          key: _countKey,
+          child: () => ElevatedButton(
+              onPressed: () => _countKey.setState(() {
+                    model.count++;
+                  }),
+              child: Text("${model.count}")),
+        )
+      ],
+    ));
   }
 }
 ```
