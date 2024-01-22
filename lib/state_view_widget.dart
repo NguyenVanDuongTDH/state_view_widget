@@ -1,23 +1,42 @@
-library state_view_widget;
+
+// ignore_for_file: must_be_immutable, invalid_use_of_protected_member, no_logic_in_create_state
+
 import 'package:flutter/material.dart';
-import 'consumer.dart';
-export  'consumer.dart';
 
-abstract class StateViewWidget extends StatelessWidget {
-  final ConsumerKey _key = ConsumerKey();
+abstract class StateViewWidget extends StatefulWidget {
+  StateViewWidget({super.key});
+  State? state;
+  
 
-  StateViewWidget({Key? key}) : super(key: key);
-  void setState(void Function() fn) => _key.setState(fn);
-  void reBuild() => _key.reBuild();
+  void setState(void Function() fn) => state?.setState(() {
+        fn();
+      });
+  void reBuild() => state?.setState(() {});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      key: _key,
-      child: () => view(context),
-    );
+  State createState() {
+    return view();
   }
 
+  @factory
   @protected
-  Widget view(BuildContext context);
+  State view();
 }
+
+abstract class ViewState<T extends StateViewWidget> extends State {
+  T? model;
+  @override
+  void initState() {
+    super.initState();
+    model = widget as T?;
+    model?.state = this;
+  }
+
+  @override
+  void dispose() {
+    model?.state = null;
+    model = null;
+    super.dispose();
+  }
+}
+
