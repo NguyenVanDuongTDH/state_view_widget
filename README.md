@@ -2,10 +2,9 @@
 add to pubspec.yaml
 ```yaml
 dependencies:
-  view_controll:
+  state_view_widget:
     git:
       url: https://github.com/NguyenVanDuongTDH/view_controll.git
-```
 
 Visual studio code
 File -> Preferences -> Configure User Snippets
