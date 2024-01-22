@@ -1,39 +1,97 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+# view_controll
+add to pubspec.yaml
+```yaml
+dependencies:
+  view_controll:
+    git:
+      url: https://github.com/NguyenVanDuongTDH/view_controll.git
 ```
 
-## Additional information
+Visual studio code
+File -> Preferences -> Configure User Snippets
+```json
+{
+	"StateViewWidget": {
+		"prefix": "stv",
+		"body": [
+		  "",
+		  "class ${1:MyView} extends StateViewWidget {",
+		  "  ${1:MyView}({Key? key}) : super(key: key);",
+		  "",
+		  "  @override",
+		  "  Widget view(BuildContext context) {",
+		  "    return ${1:MyView}Widget(model: this);",
+		  "  }",
+		  "}",
+		  "",
+		  "class ${1:MyView}Widget extends StatelessWidget {",
+		  "  final ${1:MyView} model;",
+		  "  const ${1:MyView}Widget({required this.model, Key? key}) : super(key: key);",
+		  "",
+		  "  @override",
+		  "  Widget build(BuildContext context) {",
+		  "    return const Placeholder();",
+		  "  }",
+		  "}",
+		],
+		"description": "StateViewWidget Template"
+	  }
+}	    
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Example
+```dart
+import 'package:view_controll/view_controll.dart';
+
+CounterPage counterPage = CounterPage();
+
+void main() {
+  runApp(MaterialApp(home: counterPage));
+}
+
+// ignore: must_be_immutable
+class CounterPage extends StateViewWidget {
+  CounterPage({Key? key}) : super(key: key);
+
+  int _count = 0;
+  int get count => _count;
+
+  void increment() {
+    _count++;
+    reload();
+  }
+
+  @override
+  Widget view(BuildContext context) {
+    return CounterPageWidget(model: this);
+  }
+}
+
+
+
+
+class CounterPageWidget extends StatelessWidget {
+  final CounterPage model;
+  const CounterPageWidget({required this.model, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          "${model.count}",
+          style: const TextStyle(fontSize: 21),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          model.increment();
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+
