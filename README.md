@@ -14,29 +14,25 @@ File -> Preferences -> Configure User Snippets
 	"StateViewWidget": {
 		"prefix": "stv",
 		"body": [
-		  "",
-		  "class ${1:MyView} extends StateViewWidget {",
-		  "  ${1:MyView}({Key? key}) : super(key: key);",
-		  "",
-		  "  @override",
-		  "  Widget view(BuildContext context) {",
-		  "    return ${1:MyView}Widget(model: this);",
-		  "  }",
-		  "}",
-		  "",
-		  "class ${1:MyView}Widget extends StatelessWidget {",
-		  "  final ${1:MyView} model;",
-		  "  const ${1:MyView}Widget({required this.model, Key? key}) : super(key: key);",
-		  "",
-		  "  @override",
-		  "  Widget build(BuildContext context) {",
-		  "    return const Placeholder();",
-		  "  }",
-		  "}",
+
+			"class ${1:MyWidget} extends StateViewWidget {",
+			"  MyWidget({super.key});",
+			  
+			"  @override",
+			"  StateView<${1:MyWidget}> createState() => _${1:MyWidget}State();",
+			"}",
+			"",
+			"class _${1:MyWidget}State extends StateView<${1:MyWidget}> {",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"  return const Placeholder();",
+			"  }"
+			"}"
+
 		],
 		"description": "StateViewWidget Template"
 	  }
-}	    
+}	      
 ```
 
 Example
