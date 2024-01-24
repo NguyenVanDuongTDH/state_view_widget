@@ -100,4 +100,20 @@ class _MyViewState extends StateView<MyView> {
 
 ```
 
+Example View
+```dart
+class MyWidget extends StateViewWidget {
+  MyWidget({super.key});
+  @override
+  StateView<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends StateView<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+  return const Placeholder();
+  }
+}
+```
+
 
