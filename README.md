@@ -19,10 +19,10 @@ File -> Preferences -> Configure User Snippets
 			"  MyWidget({super.key});",
 			  
 			"  @override",
-			"  StateView<${1:MyWidget}> createState() => _${1:MyWidget}State();",
+			"  StateView<${1:MyWidget}> createState() => ${1:MyWidget}State();",
 			"}",
 			"",
-			"class _${1:MyWidget}State extends StateView<${1:MyWidget}> {",
+			"class ${1:MyWidget}State extends StateView<${1:MyWidget}> {",
 			"  @override",
 			"  Widget build(BuildContext context) {",
 			"  return const Placeholder();",
