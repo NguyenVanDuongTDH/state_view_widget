@@ -10,29 +10,27 @@ dependencies:
 Visual studio code
 File -> Preferences -> Configure User Snippets
 ```json
-{
-	"StateViewWidget": {
-		"prefix": "stv",
-		"body": [
-
-			"class ${1:MyWidget} extends StateViewWidget {",
-			"  MyWidget({super.key});",
-			  
-			"  @override",
-			"  StateView<${1:MyWidget}> createState() => ${1:MyWidget}State();",
-			"}",
-			"",
-			"class ${1:MyWidget}State extends StateView<${1:MyWidget}> {",
-			"  @override",
-			"  Widget build(BuildContext context) {",
-			"  return const Placeholder();",
-			"  }"
-			"}"
-
-		],
-		"description": "StateViewWidget Template"
-	  }
-}	      
+"StateViewWidget": {
+			"prefix": "stv",
+			"body": [
+	
+				"class ${1:MyWidget} extends StateViewWidget {",
+				"  ${1:MyWidget}({super.key});",
+				  
+				"  @override",
+				"  StateView<${1:MyWidget}> createState() => ${1:MyWidget}State();",
+				"}",
+				"",
+				"class ${1:MyWidget}State extends StateView<${1:MyWidget}> {",
+				"  @override",
+				"  Widget build(BuildContext context) {",
+				"  return const Placeholder();",
+				"  }"
+				"}"
+	
+			],
+			"description": "StateViewWidget Template"
+		  }      
 ```
 
 Example
