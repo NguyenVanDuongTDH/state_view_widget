@@ -2,6 +2,7 @@
 library state_view_widget;
 
 import 'package:flutter/material.dart';
+export  'package:flutter/material.dart';
 
 abstract class StateViewWidget extends StatefulWidget {
   StateViewWidget({super.key});
