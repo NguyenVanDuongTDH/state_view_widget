@@ -1,12 +1,10 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_final_fields
-// ignore_for_file: invalid_use_of_protected_member, must_be_immutable
-
-import 'package:flutter/material.dart';
 
 class ConsumerKey {
   void Function()? func;
 
-  void reBuild() => func != null ? func!() : null;
+  void reBuild() {
+    func != null ? func!() : null;
+  }
 }
 
 class Consumer extends StatefulWidget {
@@ -40,4 +38,3 @@ class _ConsumerState extends State<Consumer> {
     return widget._child();
   }
 }
-
