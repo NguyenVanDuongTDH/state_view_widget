@@ -2,12 +2,18 @@
 library state_view_widget;
 
 import 'package:flutter/material.dart';
-export  'package:flutter/material.dart';
+export 'package:flutter/material.dart';
 
 abstract class StateViewWidget extends StatefulWidget {
   StateViewWidget({super.key});
   State? _state;
-  void reBuild() => _state!.setState(() {});
+  void reBuild() {
+    try {
+      _state!.setState(() {});
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 }
 
 abstract class StateView<T extends StateViewWidget> extends State {
@@ -17,11 +23,4 @@ abstract class StateView<T extends StateViewWidget> extends State {
     super.initState();
     model._state = this;
   }
-
-  @override
-  void dispose() {
-    if (model._state != null) model._state = null;
-    super.dispose();
-  }
 }
-

@@ -1,9 +1,16 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/material.dart';
 
 class ConsumerKey {
   void Function()? func;
 
   void reBuild() {
-    func != null ? func!() : null;
+    try {
+      func != null ? func!() : null;
+    } catch (e) {
+      func = null;
+    }
   }
 }
 
@@ -20,21 +27,10 @@ class Consumer extends StatefulWidget {
 
 class _ConsumerState extends State<Consumer> {
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     widget._key?.func = () {
       setState(() {});
     };
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    widget._key?.func = null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return widget._child();
   }
 }
