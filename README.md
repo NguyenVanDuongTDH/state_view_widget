@@ -85,7 +85,7 @@ class _MyViewState extends StateView<MyView> {
           ),
           const SizedBox(height: 50),
           Consumer(
-            key: model.countKey,
+            ref: model.countKey,
             child: () => ElevatedButton(
                 onPressed: model.incrementOnely, child: Text("${model.count}")),
           )
