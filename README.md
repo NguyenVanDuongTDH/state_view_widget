@@ -23,7 +23,7 @@ File -> Preferences -> Configure User Snippets
 				"",
 				"class ${1:MyWidget}State extends StateView<${1:MyWidget}> {",
 				"  @override",
-				"  Widget build(BuildContext context) {",
+				"  Widget view(BuildContext context) {",
 				"  return const Placeholder();",
 				"  }"
 				"}"
