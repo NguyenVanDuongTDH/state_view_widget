@@ -34,27 +34,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
-class MyWidget extends StateViewWidget {
-  MyWidget({super.key});
-  
-  // @override
-  // State<StatefulWidget> createState() {
-  //   // TODO: implement createState
-  //   throw UnimplementedError();
-  // }
-  int x = 0;
-  @override
-  State<MyWidget> createState() => MyWidgetState();
-}
-
-class MyWidgetState extends StateView<MyWidget> {
-
-  @override
-  Widget build(BuildContext context) {
-    
-  return const Placeholder();
-  }
-}
