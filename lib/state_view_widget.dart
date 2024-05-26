@@ -17,7 +17,7 @@ abstract class StateViewWidget extends StatefulWidget {
 }
 
 abstract class StateView<T extends StateViewWidget> extends State {
-  // T get model => widget as T;
+  T get model => widget as T;
   @override
   @protected
   @mustCallSuper
