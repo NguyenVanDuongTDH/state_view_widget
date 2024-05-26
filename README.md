@@ -37,15 +37,9 @@ Example
 ```dart
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart';
 import 'package:state_view_widget/consumer.dart';
 import 'package:state_view_widget/state_view_widget.dart';
 
-// MyView myView = MyView();
-
-// void main() {
-//   runApp(MaterialApp(home: myView));
-// }
 
 void main() {
   runApp(MaterialApp(home: MyView()));
@@ -54,7 +48,7 @@ void main() {
 class MyView extends StateViewWidget {
   MyView({super.key});
 
-  final WidgetRef countKey = WidgetRef();
+  final WidgetRef countRef = WidgetRef();
 
   int count = 0;
   void incrementAll() {
@@ -64,7 +58,7 @@ class MyView extends StateViewWidget {
 
   void incrementOnely() {
     count++;
-    countKey.reBuild();
+    countRef.reBuild();
   }
 
   @override
@@ -74,6 +68,7 @@ class MyView extends StateViewWidget {
 class _MyViewState extends StateView<MyView> {
   @override
   Widget view(BuildContext context) {
+    
     return Scaffold(
       body: Center(
           child: Column(
@@ -85,7 +80,7 @@ class _MyViewState extends StateView<MyView> {
           ),
           const SizedBox(height: 50),
           Consumer(
-            ref: model.countKey,
+            ref: model.countRef,
             child: () => ElevatedButton(
                 onPressed: model.incrementOnely, child: Text("${model.count}")),
           )
