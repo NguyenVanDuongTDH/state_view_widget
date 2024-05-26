@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   WidgetRef ref = WidgetRef();
-  late final x = Consumer(ref: ref, child: (ref) => Text("OKOK"));
+  late final x = Consumer(ref: ref, child: () => Text("OKOK"));
   @override
   Widget build(BuildContext context) {
    
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
         children: [
           ElevatedButton(onPressed: () {}, child: const Text("OKOK")),
           Consumer(
-            child: (ref) {
+            child: () {
               return Text("OKOK");
             },
           )

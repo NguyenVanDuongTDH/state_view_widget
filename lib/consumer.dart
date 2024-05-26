@@ -2,62 +2,29 @@
 
 import 'package:flutter/material.dart';
 
+import 'state_view_widget.dart';
+
 class WidgetRef {
-  void Function()? _func;
-  BuildContext? _context;
-  BuildContext get context => _context!;
-
+  Consumer? _consumer;
+  
   void reBuild() {
-    try {
-      _func != null ? _func!() : null;
-    } catch (e) {
-      _func = null;
-    }
+    _consumer?.reBuild();
   }
 }
 
-class Consumer extends StatefulWidget {
-  Consumer(
-      {super.key,
-      required Widget Function(WidgetRef ref) child,
-      WidgetRef? ref})
-      : _child = child,
-        _ref = ref;
-  Widget Function(WidgetRef ref) _child;
-  WidgetRef? _ref;
+class Consumer extends StateViewWidget {
+  Consumer({super.key, required Widget Function() child, WidgetRef? ref})
+      : _child = child {
+    ref?._consumer = this;
+  }
+  Widget Function() _child;
   @override
-  State<Consumer> createState() => _ConsumerState();
+  StateView<Consumer> createState() => ConsumerWidgeState();
 }
 
-class _ConsumerState extends State<Consumer> {
+class ConsumerWidgeState extends StateView<Consumer> {
   @override
-  Widget build(BuildContext context) {
-    widget._ref?._func = () {
-      setState(() {});
-    };
-    return widget._child(widget._ref!);
+  Widget view(BuildContext context) {
+    return model._child();
   }
 }
-
-
-
-// class Consumer extends StatefulWidget {
-//   Consumer({ConsumerKey? key, required Widget Function() child})
-//       : _child = child,
-//         _key = key;
-//   final ConsumerKey? _key;
-//   Widget Function() _child;
-
-//   @override
-//   State<Consumer> createState() => _ConsumerState();
-// }
-
-// class _ConsumerState extends State<Consumer> {
-//   @override
-//   Widget build(BuildContext context) {
-//     widget._key?.func = () {
-//       setState(() {});
-//     };
-//     return widget._child();
-//   }
-// }

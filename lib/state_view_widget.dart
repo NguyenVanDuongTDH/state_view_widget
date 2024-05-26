@@ -25,3 +25,5 @@ abstract class StateView<T extends StateViewWidget> extends State {
   @protected
   Widget view(BuildContext context);
 }
+
+
