@@ -47,7 +47,7 @@ class MyWidget extends StateViewWidget {
   // }
   int x = 0;
   @override
-  StateView<MyWidget> createState() => MyWidgetState();
+  State<MyWidget> createState() => MyWidgetState();
 }
 
 class MyWidgetState extends StateView<MyWidget> {
