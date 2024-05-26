@@ -34,3 +34,20 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
+class MyWidget extends StateViewWidget {
+  MyWidget({super.key});
+  @override
+  StateView<MyWidget> createState() => MyWidgetState();
+}
+
+class MyWidgetState extends StateView<MyWidget> {
+
+  
+  @override
+  Widget view(BuildContext context) {
+    // TODO: implement view
+    throw UnimplementedError();
+  }
+}
