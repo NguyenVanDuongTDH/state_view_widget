@@ -54,7 +54,7 @@ void main() {
 class MyView extends StateViewWidget {
   MyView({super.key});
 
-  final ConsumerKey countKey = ConsumerKey();
+  final WidgetRef countKey = WidgetRef();
 
   int count = 0;
   void incrementAll() {
@@ -73,7 +73,7 @@ class MyView extends StateViewWidget {
 
 class _MyViewState extends StateView<MyView> {
   @override
-  Widget build(BuildContext context) {
+  Widget view(BuildContext context) {
     return Scaffold(
       body: Center(
           child: Column(
@@ -108,7 +108,7 @@ class MyWidget extends StateViewWidget {
 
 class _MyWidgetState extends StateView<MyWidget> {
   @override
-  Widget build(BuildContext context) {
+  Widget view(BuildContext context) {
   return const Placeholder();
   }
 }
